@@ -1,5 +1,4 @@
 const express = require('express');
-//const chirpsStore = require('../chirpstore');
 const database = require('../db');
 let router = express.Router();
 
@@ -26,9 +25,6 @@ router.get('/:id?', (req, res) => {
 
 //save chirp
 router.post('/', (req,res) => {
-    // console.log('creating a chirp');
-    // console.log('Testing! req.body=' + req.body);
-    // console.log('Testing! req.body.text=' + req.body.text);
     database.CreateChirp(req.body.text, 1)
     .then((results) => {
         res.send(results);
@@ -52,7 +48,6 @@ router.delete('/:id', (req, res) => {
 })  
 
 //update chirps
-//outer.put('/:id/edit', (req, res) => {
 router.put('/:id', (req, res) => {
     console.log('updating some stuff');
     console.log(req.body.text);
@@ -69,44 +64,4 @@ router.put('/:id', (req, res) => {
 
 
 module.exports = router;
-
-
-
-
-// //retrive chirp
-// router.get('/:id?', (req, res) => {
-//     let id = req.params.id
-//     if(id) {
-//         res.json(chirpsStore.GetChirp(id));
-//     } else {    
-//         res.send(chirpsStore.GetChirps());
-//     }
-// });
-
-// //save chirp
-// router.post('/', (req,res) => {
-//     console.log(req.body);
-//     chirpsStore.CreateChirp(req.body);
-//     res.sendStatus(200);
-// });
-
-// router.delete('/:id?', (req, res) => {
-//     //delete resource
-//     let id = req.params.id
-//     chirpsStore.DeleteChirp(id);
-//     res.sendStatus(200);
-// })  
-
-// router.put('/:id', (req, res) => {
-//     console.log('updating some stuff');
-//     console.log(req.body);
-//     let id = req.params.id;
-//     let chirp = req.body;
-//     chirpsStore.UpdateChirp(id, chirp);
-//     res.send('success').status(200);
-// })
-
-
-
-
 

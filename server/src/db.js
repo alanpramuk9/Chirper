@@ -99,7 +99,7 @@ let createChirp = (text, userid) => {
     })
 };
 
-//`INSERT INTO mentions (userid, chirpid) VALUES(${userid}, ${chirpid})`
+//create mentions
 let createMention = (userid, chirpid) => {
     return new Promise((resolve, reject) => {
         connection.query(`INSERT INTO mentions (userid, chirpid) VALUES(${userid}, ${chirpid})`, (err, results, fields) => {
@@ -116,6 +116,7 @@ let createMention = (userid, chirpid) => {
     })
 }
 
+//get user of the mention
 let getMentions = (userid) => {
     //connection.connect();
     return new Promise((resolve, reject) => {
@@ -131,7 +132,7 @@ let getMentions = (userid) => {
     })  
 }
 
-
+//get the mentions text and who mentioned it
 let getTheMentions = (text, userid) => {
     return new Promise((resolve, reject) => {
       connection.query(`select * from chirps where userid = ${userid} and text='${text}'`, (err, results, field) => {
@@ -166,6 +167,7 @@ let getTheMentions = (text, userid) => {
     });
   };
 
+  //update mentions
   let updateMentions = (userHandle, chirpid) => {
     return new Promise((resolve, reject) => {
       connection.query(`SELECT * FROM users WHERE name = '${userHandle}'`, (err, results, field) => {
@@ -188,5 +190,6 @@ module.exports = {
     CreateChirp: createChirp,
     CreateMention: createMention,
     GetMentions: getMentions,
-    UpdateMentions: updateMentions
+    UpdateMentions: updateMentions,
+    getTheMentions: getTheMentions
 }
